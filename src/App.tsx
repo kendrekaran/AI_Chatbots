@@ -137,7 +137,7 @@ const CodeBlock: React.FC<{ code: string; language: string }> = ({ code, languag
     <div className="relative">
       <button
         onClick={copyCode}
-        className="absolute right-2 top-2 p-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700"
+        className="absolute right-2 top-2 p-2 rounded-lg bg-black-800 text-white hover:bg-gray-700"
       >
         {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
       </button>
@@ -163,8 +163,8 @@ export default function ChatApp() {
   const [error, setError] = useState<ErrorState>({ isError: false, message: '' });
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
-      return (localStorage.getItem('theme') as 'light' | 'dark') || 
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      return (localStorage.getItem('theme') as 'light') || 
+        (window.matchMedia('(prefers-color-scheme: light)').matches ? 'dark' : 'light');
     }
     return 'light';
   });
@@ -482,7 +482,7 @@ export default function ChatApp() {
     }`}>
       <div className="container mx-auto p-4">
         <div className={`max-w-4xl mx-auto rounded-xl shadow-xl overflow-hidden ${
-          theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+          theme === 'dark' ? 'bg-black' : 'bg-white'
         }`}>
           {/* Header section with enhanced controls */}
           <div className={`p-4 ${
@@ -570,7 +570,7 @@ export default function ChatApp() {
 
           {showSettings && (
             <div className={`p-4 border-b ${
-              theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'
+              theme === 'dark' ? 'bg-black border-gray-700' : 'bg-gray-50 border-gray-200'
             }`}>
               <h2 className={`text-lg font-semibold mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-gray-800'
@@ -590,7 +590,7 @@ export default function ChatApp() {
                     onChange={(e) => setSettings(prev => ({ ...prev, model: e.target.value }))}
                     className={`w-full p-2 rounded-lg border ${
                       theme === 'dark' 
-                        ? 'bg-gray-700 border-gray-600 text-white' 
+                        ? 'bg-black border-gray-600 text-white' 
                         : 'bg-white border-gray-300'
                     }`}
                   >
@@ -601,14 +601,14 @@ export default function ChatApp() {
                     ))}
                   </select>
                   <p className={`text-xs mt-1 ${
-                    theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                    theme === 'dark' ? 'text-black' : 'text-gray-500'
                   }`}>
                     {AVAILABLE_MODELS.find(m => m.id === settings.model)?.description}
                   </p>
                 </div>
                 <div>
                   <label className={`block text-sm font-medium mb-1 ${
-                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                    theme === 'dark' ? 'text-black' : 'text-gray-700'
                   }`}>
                     Temperature ({settings.temperature})
                   </label>
@@ -647,7 +647,7 @@ export default function ChatApp() {
                     }))}
                     className={`w-full p-2 rounded-lg border ${
                       theme === 'dark' 
-                        ? 'bg-gray-700 border-gray-600 text-white' 
+                        ? 'bg-black border-gray-600 text-white' 
                         : 'bg-white border-gray-300'
                     }`}
                   />
@@ -674,7 +674,7 @@ export default function ChatApp() {
                     }))}
                     className={`w-full p-2 rounded-lg border ${
                       theme === 'dark' 
-                        ? 'bg-gray-700 border-gray-600 text-white' 
+                        ? 'bg-black border-gray-600 text-white' 
                         : 'bg-white border-gray-300'
                     }`}
                   />
@@ -751,11 +751,11 @@ export default function ChatApp() {
           
           <div className="p-0">
             <div className={`h-[600px] overflow-y-auto p-6 space-y-6 ${
-              theme === 'dark' ? 'bg-gray-800' : ''
+              theme === 'dark' ? 'bg-black' : ''
             }`} role="log">
               {messages.length === 0 && (
                 <div className={`text-center p-8 rounded-lg ${
-                  theme === 'dark' ? 'bg-gray-700 text-gray-300' : 'bg-gray-50 text-gray-500'
+                  theme === 'dark' ? 'bg-black text-gray-300' : 'bg-gray-50 text-gray-500'
                 }`}>
                   <Bot className="w-12 h-12 mx-auto mb-4 text-indigo-500" />
                   <p className="font-medium">Welcome to AI Chat!</p>
@@ -777,7 +777,7 @@ export default function ChatApp() {
                         message.role === 'user'
                           ? 'bg-indigo-500 text-white'
                           : theme === 'dark' 
-                            ? 'bg-gray-700 text-gray-200' 
+                            ? 'bg-black text-gray-200' 
                             : 'bg-gray-100 text-gray-800'
                       }`}
                     >
@@ -820,7 +820,7 @@ export default function ChatApp() {
               {isLoading && (
                 <div className="flex justify-start">
                   <div className={`p-4 rounded-2xl flex items-center space-x-2 ${
-                    theme === 'dark' ? 'bg-gray-700 text-gray-200' : 'bg-gray-100 text-gray-600'
+                    theme === 'dark' ? 'bg-black text-gray-200' : 'bg-gray-100 text-gray-600'
                   }`}>
                     <Loader2 className="w-4 h-4 animate-spin" />
                     <span className="text-sm">Processing...</span>
@@ -833,7 +833,7 @@ export default function ChatApp() {
 
             {/* Enhanced input form with additional features */}
             <form onSubmit={sendMessage} className={`p-4 border-t ${
-              theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-gray-50'
+              theme === 'dark' ? 'bg-black border-gray-700' : 'bg-gray-50'
             }`}>
               <div className="flex flex-col space-y-2">
                 {/* Message input row */}
@@ -849,7 +849,7 @@ export default function ChatApp() {
                       className={`w-full p-3 pr-24 border rounded-xl focus:outline-none focus:ring-2 
                                focus:ring-indigo-500 ${
                         theme === 'dark' 
-                          ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
+                          ? 'bg-black border-gray-600 text-white placeholder-gray-400' 
                           : 'bg-white'
                       }`}
                       disabled={isLoading}
@@ -916,7 +916,7 @@ export default function ChatApp() {
 
         {/* Keyboard shortcuts modal */}
         <div className={`fixed bottom-4 right-4 p-4 rounded-lg shadow-lg ${
-          theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+          theme === 'dark' ? 'bg-black text-white' : 'bg-white text-gray-800'
         }`}>
           <h3 className="font-medium mb-2">Keyboard Shortcuts</h3>
           <ul className="text-sm space-y-1">
