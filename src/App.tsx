@@ -63,6 +63,13 @@ interface Model {
 
 const AVAILABLE_MODELS: Model[] = [
   { 
+    id: "google/gemini-2.0-flash-001", 
+    name: "Gemini Flash 2.0",
+    description: "Most capable Google model",
+    provider: "Google",
+    contextWindow: 20000
+  },
+  { 
     id: "deepseek/deepseek-r1-distill-llama-8b", 
     name: "DeepSeek: R1 8B",
     description: "Most capable Deepseek model",
@@ -74,13 +81,6 @@ const AVAILABLE_MODELS: Model[] = [
     name: "Claude 3.5 Haiku",
     description: "Most capable Claude model",
     provider: "Anthropic",
-    contextWindow: 20000
-  },
-  { 
-    id: "google/gemini-2.0-flash-001", 
-    name: "Gemini Flash 2.0",
-    description: "Most capable Google model",
-    provider: "Google",
     contextWindow: 20000
   },
   { 
