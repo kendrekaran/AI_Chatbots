@@ -569,175 +569,173 @@ export default function ChatApp() {
           </div>
 
           {showSettings && (
-            <div className={`p-4 border-b ${
-              theme === 'dark' ? 'bg-black border-gray-700' : 'bg-gray-50 border-gray-200'
+            <div className={`p-6 border-b ${
+              theme === 'dark' ? 'bg-gray-900 border-gray-700' : 'bg-gray-50 border-gray-200'
             }`}>
-              <h2 className={`text-lg font-semibold mb-4 ${
-                theme === 'dark' ? 'text-white' : 'text-gray-800'
-              }`}>
-                <Sliders className="w-5 h-5 inline-block mr-2" />
-                Settings
-              </h2>
-              <div className="grid grid-cols-1 gap-4">
-                <div>
-                  <label className={`block text-sm font-medium mb-1 ${
-                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Model
-                  </label>
-                  <select
-                    value={settings.model}
-                    onChange={(e) => setSettings(prev => ({ ...prev, model: e.target.value }))}
-                    className={`w-full p-2 rounded-lg border ${
-                      theme === 'dark' 
-                        ? 'bg-black border-gray-600 text-white' 
-                        : 'bg-white border-gray-300'
-                    }`}
-                  >
-                    {AVAILABLE_MODELS.map(model => (
-                      <option key={model.id} value={model.id} className="py-2">
-                        {model.name} - {model.description}
-                      </option>
-                    ))}
-                  </select>
-                  <p className={`text-xs mt-1 ${
-                    theme === 'dark' ? 'text-black' : 'text-gray-500'
-                  }`}>
-                    {AVAILABLE_MODELS.find(m => m.id === settings.model)?.description}
-                  </p>
-                </div>
-                <div>
-                  <label className={`block text-sm font-medium mb-1 ${
-                    theme === 'dark' ? 'text-black' : 'text-gray-700'
-                  }`}>
-                    Temperature ({settings.temperature})
-                  </label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.1"
-                    value={settings.temperature}
-                    onChange={(e) => setSettings(prev => ({ 
-                      ...prev, 
-                      temperature: parseFloat(e.target.value) 
-                    }))}
-                    className="w-full"
-                  />
-                  <p className={`text-xs mt-1 ${
-                    theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-                  }`}>
-                    Lower values make responses more focused, higher values more creative
-                  </p>
-                </div>
-                <div>
-                  <label className={`block text-sm font-medium mb-1 ${
-                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Max Tokens
-                  </label>
-                  <input
-                    type="number"
-                    min="100"
-                    max="4000"
-                    value={settings.maxTokens}
-                    onChange={(e) => setSettings(prev => ({ 
-                      ...prev, 
-                      maxTokens: parseInt(e.target.value) 
-                    }))}
-                    className={`w-full p-2 rounded-lg border ${
-                      theme === 'dark' 
-                        ? 'bg-black border-gray-600 text-white' 
-                        : 'bg-white border-gray-300'
-                    }`}
-                  />
-                  <p className={`text-xs mt-1 ${
-                    theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-                  }`}>
-                    Maximum length of the response (1 token ≈ 4 characters)
-                  </p>
-                </div>
-                <div>
-                  <label className={`block text-sm font-medium mb-1 ${
-                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Typing Speed (ms)
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    max="100"
-                    value={settings.typingSpeed}
-                    onChange={(e) => setSettings(prev => ({ 
-                      ...prev, 
-                      typingSpeed: parseInt(e.target.value) 
-                    }))}
-                    className={`w-full p-2 rounded-lg border ${
-                      theme === 'dark' 
-                        ? 'bg-black border-gray-600 text-white' 
-                        : 'bg-white border-gray-300'
-                    }`}
-                  />
-                  <p className={`text-xs mt-1 ${
-                    theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-                  }`}>
-                    Speed of the typing animation (lower = faster)
-                  </p>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <div>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={settings.autoScroll}
+              <div className="max-w-3xl mx-auto">
+                <h2 className={`text-xl font-bold mb-6 ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-800'
+                }`}>
+                  <Sliders className="w-5 h-5 inline-block mr-2" />
+                  Chat Settings
+                </h2>
+                
+                <div className="space-y-6">
+                  {/* Model Selection */}
+                  <div className="bg-white/5 p-4 rounded-lg">
+                    <h3 className={`text-md font-semibold mb-3 ${
+                      theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
+                    }`}>Model Selection</h3>
+                    <select
+                      value={settings.model}
+                      onChange={(e) => setSettings(prev => ({ ...prev, model: e.target.value }))}
+                      className={`w-full p-3 rounded-lg border ${
+                        theme === 'dark' 
+                          ? 'bg-gray-800 border-gray-600 text-white' 
+                          : 'bg-white border-gray-300'
+                      }`}
+                    >
+                      {AVAILABLE_MODELS.map(model => (
+                        <option key={model.id} value={model.id}>
+                          {model.name} - {model.description}
+                        </option>
+                      ))}
+                    </select>
+                    <p className={`text-sm mt-2 ${
+                      theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                    }`}>
+                      {AVAILABLE_MODELS.find(m => m.id === settings.model)?.description}
+                    </p>
+                  </div>
+
+                  {/* Generation Settings */}
+                  <div className="bg-white/5 p-4 rounded-lg">
+                    <h3 className={`text-md font-semibold mb-3 ${
+                      theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
+                    }`}>Generation Settings</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 ${
+                          theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                        }`}>
+                          Temperature: {settings.temperature}
+                        </label>
+                        <input
+                          type="range"
+                          min="0"
+                          max="1"
+                          step="0.1"
+                          value={settings.temperature}
+                          onChange={(e) => setSettings(prev => ({ 
+                            ...prev, 
+                            temperature: parseFloat(e.target.value) 
+                          }))}
+                          className="w-full accent-indigo-500"
+                        />
+                        <p className={`text-xs mt-1 ${
+                          theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                        }`}>
+                          Lower = more focused, Higher = more creative
+                        </p>
+                      </div>
+
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 ${
+                          theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                        }`}>
+                          Max Tokens
+                        </label>
+                        <input
+                          type="number"
+                          min="100"
+                          max="4000"
+                          value={settings.maxTokens}
+                          onChange={(e) => setSettings(prev => ({ 
+                            ...prev, 
+                            maxTokens: parseInt(e.target.value) 
+                          }))}
+                          className={`w-full p-2 rounded-lg border ${
+                            theme === 'dark' 
+                              ? 'bg-gray-800 border-gray-600 text-white' 
+                              : 'bg-white border-gray-300'
+                          }`}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Interface Settings */}
+                  <div className="bg-white/5 p-4 rounded-lg">
+                    <h3 className={`text-md font-semibold mb-3 ${
+                      theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
+                    }`}>Interface Settings</h3>
+                    <div className="space-y-3">
+                      <label className={`flex items-center space-x-3 ${
+                        theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                      }`}>
+                        <input
+                          type="checkbox"
+                          checked={settings.autoScroll}
+                          onChange={(e) => setSettings(prev => ({
+                            ...prev,
+                            autoScroll: e.target.checked
+                          }))}
+                          className="rounded border-gray-300"
+                        />
+                        <span>Auto-scroll to new messages</span>
+                      </label>
+                      <label className={`flex items-center space-x-3 ${
+                        theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                      }`}>
+                        <input
+                          type="checkbox"
+                          checked={settings.codeHighlighting}
+                          onChange={(e) => setSettings(prev => ({
+                            ...prev,
+                            codeHighlighting: e.target.checked
+                          }))}
+                          className="rounded border-gray-300"
+                        />
+                        <span>Enable code syntax highlighting</span>
+                      </label>
+                      <label className={`flex items-center space-x-3 ${
+                        theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                      }`}>
+                        <input
+                          type="checkbox"
+                          checked={settings.speechRecognition}
+                          onChange={(e) => setSettings(prev => ({
+                            ...prev,
+                            speechRecognition: e.target.checked
+                          }))}
+                          className="rounded border-gray-300"
+                        />
+                        <span>Enable voice input</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* System Prompt */}
+                  <div className="bg-white/5 p-4 rounded-lg">
+                    <h3 className={`text-md font-semibold mb-3 ${
+                      theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
+                    }`}>System Prompt</h3>
+                    <textarea
+                      value={settings.systemPrompt}
                       onChange={(e) => setSettings(prev => ({
                         ...prev,
-                        autoScroll: e.target.checked
+                        systemPrompt: e.target.value
                       }))}
+                      className={`w-full p-3 rounded-lg border ${
+                        theme === 'dark' 
+                          ? 'bg-gray-800 border-gray-600 text-white' 
+                          : 'bg-white border-gray-300'
+                      }`}
+                      rows={3}
+                      placeholder="Set a custom system prompt to guide the AI's behavior..."
                     />
-                    <span>Auto-scroll to bottom</span>
-                  </label>
+                  </div>
                 </div>
-                <div>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={settings.codeHighlighting}
-                      onChange={(e) => setSettings(prev => ({
-                        ...prev,
-                        codeHighlighting: e.target.checked
-                      }))}
-                    />
-                    <span>Code syntax highlighting</span>
-                  </label>
-                </div>
-                <div>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={settings.speechRecognition}
-                      onChange={(e) => setSettings(prev => ({
-                        ...prev,
-                        speechRecognition: e.target.checked
-                      }))}
-                    />
-                    <span>Enable speech recognition</span>
-                  </label>
-                </div>
-              </div>
-              <div className="mt-4">
-                <label className="block text-sm font-medium mb-1">System Prompt</label>
-                <textarea
-                  value={settings.systemPrompt}
-                  onChange={(e) => setSettings(prev => ({
-                    ...prev,
-                    systemPrompt: e.target.value
-                  }))}
-                  className="w-full p-2 rounded-lg border"
-                  rows={3}
-                  placeholder="Set a custom system prompt..."
-                />
               </div>
             </div>
           )}
@@ -912,27 +910,6 @@ export default function ChatApp() {
               </div>
             </form>
           </div>
-        </div>
-
-        {/* Keyboard shortcuts modal */}
-        <div className={`fixed bottom-4 right-4 p-4 rounded-lg shadow-lg ${
-          theme === 'dark' ? 'bg-black text-white' : 'bg-white text-gray-800'
-        }`}>
-          <h3 className="font-medium mb-2">Keyboard Shortcuts</h3>
-          <ul className="text-sm space-y-1">
-            <li>
-              <kbd className="px-2 py-1 rounded bg-gray-200 text-gray-800">Ctrl + Enter</kbd>
-              <span className="ml-2">Send message</span>
-            </li>
-            <li>
-              <kbd className="px-2 py-1 rounded bg-gray-200 text-gray-800">Ctrl + L</kbd>
-              <span className="ml-2">Clear chat</span>
-            </li>
-            <li>
-              <kbd className="px-2 py-1 rounded bg-gray-200 text-gray-800">Ctrl + S</kbd>
-              <span className="ml-2">Save chat</span>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
